@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IDID Archive - Unofficial Fan Platform</title>
+
+    <!-- THIS IS WHERE IT SHOULD BE -->
+    <link rel="icon" type="image/png" href="logo.png">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Google Fonts: Inter & Outfit -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        idid: {
+                            50: '#eefbfe',
+                            100: '#d5f5fc',
+                            300: '#7be3f5',
+                            400: '#4dc8e9',
+                            500: '#23b5dd',
+                            600: '#1495bd',
+                            700: '#13779a',
+                            800: '#16617c',
+                            900: '#165068',
+                            glow: '#7be3f5'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #091018; }
+        ::-webkit-scrollbar-thumb { background: #1e2e3d; border-radius: 9999px; }
+        ::-webkit-scrollbar-thumb:hover { background: #4dc8e9; }
+        .glass-panel {
+            background: rgba(9, 16, 24, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(77, 200, 233, 0.12);
+        }
+        .glass-card {
+            background: rgba(15, 23, 36, 0.65);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(77, 200, 233, 0.08);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            border-color: rgba(77, 200, 233, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(77, 200, 233, 0.2);
+        }
+        .glow-text { text-shadow: 0 0 12px rgba(77, 200, 233, 0.6); }
+        .glow-bg { box-shadow: 0 0 20px rgba(77, 200, 233, 0.35); }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col md:flex-row antialiased selection:bg-idid-400 selection:text-slate-950">
+
+    <!-- Mobile Header -->
+    <header class="md:hidden glass-panel sticky top-0 z-40 p-4 flex justify-between items-center border-b border-slate-800">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-8 flex items-center justify-center">
+                <svg viewBox="0 0 300 120" class="w-full h-full fill-idid-400">
+                    <circle cx="25" cy="35" r="14"/>
+                    <path d="M12 58 h26 v42 h-26 z"/>
+                    <path d="M38 78 q15-20 30 0 v22 h-26 v-15 q-4-7-10 0 z"/>
+                    <circle cx="115" cy="35" r="14"/>
+                    <path d="M102 58 h26 v42 h-26 z"/>
+                    <path d="M128 78 q15-20 30 0 v22 h-26 v-15 q-4-7-10 0 z"/>
+                    <path d="M192 58 h24 v42 h-24 z"/>
+                    <path d="M192 78 q-15-20-30 0 v22 h26 v-15 q4-7 10 0 z"/>
+                </svg>
+            </div>
+            <span class="font-display font-bold text-xl tracking-wider text-white glow-text">IDID ARCHIVE</span>
+        </div>
+        <button id="mobileMenuBtn" class="p-2 rounded-lg bg-slate-900 text-slate-300 hover:text-idid-400">
+            <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+    </header>
+
+    <!-- Sidebar Navigation -->
+    <aside id="sidebar" class="fixed inset-y-0 left-0 z-50 w-64 glass-panel border-r border-slate-800/80 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out flex flex-col">
+        <!-- Logo Header -->
+        <div class="p-6 flex items-center justify-between border-b border-slate-800/60">
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-10 flex items-center justify-center">
+                    <svg viewBox="0 0 300 120" class="w-full h-full fill-idid-400 filter drop-shadow-[0_0_10px_rgba(77,200,233,0.5)]">
+                        <circle cx="25" cy="35" r="14"/>
+                        <path d="M12 58 h26 v42 h-26 z"/>
+                        <path d="M38 78 q15-20 30 0 v22 h-26 v-15 q-4-7-10 0 z"/>
+                        <circle cx="115" cy="35" r="14"/>
+                        <path d="M102 58 h26 v42 h-26 z"/>
+                        <path d="M128 78 q15-20 30 0 v22 h-26 v-15 q-4-7-10 0 z"/>
+                        <path d="M192 58 h24 v42 h-24 z"/>
+                        <path d="M192 78 q-15-20-30 0 v22 h26 v-15 q4-7 10 0 z"/>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="font-display font-extrabold text-lg tracking-wider text-white glow-text leading-none">IDID</h1>
+                    <p class="text-[10px] tracking-widest text-idid-400 font-semibold uppercase mt-1">ARCHIVE</p>
+                </div>
+            </div>
+            <button id="closeSidebarBtn" class="md:hidden text-slate-400 hover:text-white">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+        </div>
+
+        <!-- Navigation Links -->
+        <nav class="flex-1 px-4 py-6 space-y-1.5 overflow-y-auto">
+            <button data-tab="schedule" class="nav-tab w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-sm transition-all duration-200 text-idid-400 bg-idid-400/10 border border-idid-400/30">
+                <i data-lucide="calendar" class="w-5 h-5"></i>
+                <span>Schedule</span>
+            </button>
+            
+            <button data-tab="berriz" class="nav-tab w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-sm transition-all duration-200 text-slate-400 hover:bg-slate-800/60 hover:text-idid-400">
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 100 100">
+                    <path d="M20 10 h35 c20 0 30 8 30 20 c0 8-5 15-13 18 c10 3 16 11 16 22 c0 15-12 20-33 20 h-35 z M42 28 v16 h12 c6 0 10-2 10-8 c0-5-4-8-10-8 z M42 58 v20 h14 c7 0 11-3 11-10 c0-7-4-10-11-10 z"/>
+                </svg>
+                <span>Berriz</span>
+            </button>
+
+            <button data-tab="twitter" class="nav-tab w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-sm transition-all duration-200 text-slate-400 hover:bg-slate-800/60 hover:text-idid-400">
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+                <span>X (Twitter)</span>
+            </button>
+
+            <button data-tab="youtube" class="nav-tab w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-sm transition-all duration-200 text-slate-400 hover:bg-slate-800/60 hover:text-idid-400">
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+                <span>YouTube</span>
+            </button>
+
+            <button data-tab="bubble" class="nav-tab w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-sm transition-all duration-200 text-slate-400 hover:bg-slate-800/60 hover:text-idid-400">
+                <i data-lucide="message-circle" class="w-5 h-5"></i>
+                <span>Bubble</span>
+            </button>
+
+            <button data-tab="instagram" class="nav-tab w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-sm transition-all duration-200 text-slate-400 hover:bg-slate-800/60 hover:text-idid-400">
+                <i data-lucide="instagram" class="w-5 h-5"></i>
+                <span>Instagram</span>
+            </button>
+
+            <button data-tab="tiktok" class="nav-tab w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-sm transition-all duration-200 text-slate-400 hover:bg-slate-800/60 hover:text-idid-400">
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                    <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.29-2.58.74-5.18 2.67-6.85 1.58-1.38 3.69-2.1 5.78-2.02.05.01.1 0 .15.01v4.08c-.88-.08-1.78.13-2.51.62-.96.63-1.54 1.73-1.52 2.87.03 1.17.65 2.25 1.63 2.85.92.57 2.07.72 3.12.42.98-.27 1.83-.98 2.22-1.93.31-.73.43-1.54.41-2.33.02-4.05.01-8.1.02-12.15z"/>
+                </svg>
+                <span>TikTok</span>
+            </button>
+
+            <button data-tab="others" class="nav-tab w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-sm transition-all duration-200 text-slate-400 hover:bg-slate-800/60 hover:text-idid-400">
+                <i data-lucide="sparkles" class="w-5 h-5"></i>
+                <span>Others</span>
+            </button>
+        </nav>
+
+        <!-- Sidebar Footer & Group Info -->
+        <div class="p-4 border-t border-slate-800/60 bg-slate-900/40">
+            <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800 text-xs">
+                <p class="font-semibold text-slate-300 mb-1 flex items-center justify-between">
+                    <span>IDID Members</span>
+                    <span class="text-[10px] px-1.5 py-0.5 rounded bg-idid-400/20 text-idid-400 border border-idid-400/30">7 Members</span>
+                </p>
+                <div class="flex flex-wrap gap-1 text-[11px] text-slate-400">
+                    <span>Yonghoon</span> • <span>Minjae</span> • <span>Wonbin</span> • <span>Yoochan</span> • <span>Seonghyeon</span> • <span>Junhyuk</span> • <span>Semin</span>
+                </div>
+            </div>
+            <p class="text-[11px] text-slate-500 text-center mt-3">IDID Unofficial Archive &copy; 2026</p>
+        </div>
+    </aside>
+
+    <div id="sidebarBackdrop" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-40 hidden md:hidden"></div>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 md:ml-64 p-4 sm:p-6 lg:p-8 min-h-screen">
+        
+        <!-- Tab 1: Schedule -->
+        <section id="schedule-section" class="tab-content space-y-6">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 glass-panel p-6 rounded-2xl border border-slate-800">
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-display font-bold text-white flex items-center gap-3">
+                        <i data-lucide="calendar" class="w-8 h-8 text-idid-400"></i> Schedule Archive
+                    </h2>
+                    <p class="text-slate-400 text-sm mt-1">Track official appearances, fansigns, music shows, and broadcasts.</p>
+                </div>
+                <div class="flex flex-wrap items-center gap-2">
+                    <button id="addEventBtn" class="flex items-center gap-2 bg-idid-400 hover:bg-idid-300 text-slate-950 font-bold px-4 py-2.5 rounded-xl text-sm transition-all shadow-lg shadow-idid-400/20">
+                        <i data-lucide="plus" class="w-4 h-4"></i> Add Event
+                    </button>
+                    <div class="flex bg-slate-900/80 p-1 rounded-xl border border-slate-800">
+                        <button id="calendarViewBtn" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-idid-400 text-slate-950 transition-all">Calendar</button>
+                        <button id="listViewBtn" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition-all">List</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative">
+                <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-3.5 text-slate-400"></i>
+                <input type="text" id="scheduleSearch" placeholder="Search schedule title, location, or details..." class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl text-xs pl-10 pr-4 py-3 text-slate-200 placeholder-slate-500 focus:outline-none focus:border-idid-400">
+            </div>
+
+            <div id="calendarView" class="glass-panel p-6 rounded-2xl border border-slate-800">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 id="currentMonthYear" class="text-xl font-display font-bold text-slate-100">November 2026</h3>
+                    <div class="flex gap-2">
+                        <button id="prevMonthBtn" class="p-2 rounded-lg bg-slate-900/80 text-slate-300 hover:bg-slate-800 hover:text-idid-400 transition-all border border-slate-800"><i data-lucide="chevron-left" class="w-5 h-5"></i></button>
+                        <button id="nextMonthBtn" class="p-2 rounded-lg bg-slate-900/80 text-slate-300 hover:bg-slate-800 hover:text-idid-400 transition-all border border-slate-800"><i data-lucide="chevron-right" class="w-5 h-5"></i></button>
+                    </div>
+                </div>
+                <div class="grid grid-cols-7 gap-1 sm:gap-2 mb-2 text-center text-xs font-bold text-idid-400 tracking-wider uppercase">
+                    <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+                </div>
+                <div id="calendarGrid" class="grid grid-cols-7 gap-1 sm:gap-2"></div>
+            </div>
+
+            <div id="listView" class="hidden glass-panel p-6 rounded-2xl border border-slate-800 space-y-4">
+                <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-slate-800">
+                    <span class="text-sm font-semibold text-slate-300">Upcoming & Past Events</span>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs text-slate-400">Filter Tag:</span>
+                        <select id="scheduleTagFilter" class="bg-slate-900 border border-slate-700 rounded-lg text-xs px-3 py-1.5 text-slate-200 focus:outline-none focus:border-idid-400">
+                            <option value="ALL">All Tags</option>
+                            <option value="Fansign">#Fansign</option>
+                            <option value="MusicShow">#MusicShow</option>
+                            <option value="Broadcast">#Broadcast</option>
+                            <option value="Concert">#Concert</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="scheduleListContainer" class="space-y-3"></div>
+            </div>
+        </section>
+
+        <!-- Tab 2: Berriz -->
+        <section id="berriz-section" class="tab-content hidden space-y-6">
+            <div class="glass-panel p-6 rounded-2xl border border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-display font-bold text-white flex items-center gap-3">
+                        <svg class="w-8 h-8 fill-idid-400" viewBox="0 0 100 100">
+                            <path d="M20 10 h35 c20 0 30 8 30 20 c0 8-5 15-13 18 c10 3 16 11 16 22 c0 15-12 20-33 20 h-35 z M42 28 v16 h12 c6 0 10-2 10-8 c0-5-4-8-10-8 z M42 58 v20 h14 c7 0 11-3 11-10 c0-7-4-10-11-10 z"/>
+                        </svg> 
+                        Berriz Updates
+                    </h2>
+                    <p class="text-slate-400 text-sm mt-1">Official posts, member notices, and responses to fans on Berriz.</p>
+                </div>
+                
+                <div class="flex flex-wrap items-center gap-3">
+                    <select id="berrizMemberFilter" class="bg-slate-900/90 border border-slate-700/80 rounded-xl text-xs px-3.5 py-2.5 text-slate-200 focus:outline-none focus:border-idid-400">
+                        <option value="ALL">All Members</option>
+                        <option value="Jang Yonghoon">Jang Yonghoon</option>
+                        <option value="Kim Minjae">Kim Minjae</option>
+                        <option value="Park Wonbin">Park Wonbin</option>
+                        <option value="Chu Yoochan">Chu Yoochan</option>
+                        <option value="Park Seonghyeon">Park Seonghyeon</option>
+                        <option value="Baek Junhyuk">Baek Junhyuk</option>
+                        <option value="Jeong Semin">Jeong Semin</option>
+                    </select>
+
+                    <select id="berrizSortFilter" class="bg-slate-900/90 border border-slate-700/80 rounded-xl text-xs px-3.5 py-2.5 text-slate-200 focus:outline-none focus:border-idid-400">
+                        <option value="newest">Newest First</option>
+                        <option value="oldest">Oldest First</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="relative">
+                <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-3.5 text-slate-400"></i>
+                <input type="text" id="berrizSearch" placeholder="Search Berriz posts, fan comments, or tags..." class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl text-xs pl-10 pr-4 py-3 text-slate-200 placeholder-slate-500 focus:outline-none focus:border-idid-400">
+            </div>
+
+            <div id="berrizFeed" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+        </section>
+
+        <!-- Tab 3: X (Twitter) -->
+        <section id="twitter-section" class="tab-content hidden space-y-6">
+            <div class="glass-panel p-6 rounded-2xl border border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-display font-bold text-white flex items-center gap-3">
+                        <svg class="w-7 h-7 fill-idid-400" viewBox="0 0 24 24">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg> 
+                        X (Twitter) Feed
+                    </h2>
+                    <p class="text-slate-400 text-sm mt-1">Archived tweets from official handles, broadcasting shows, and fan accounts.</p>
+                </div>
+                
+                <div class="flex flex-wrap items-center gap-3">
+                    <select id="twitterAccountFilter" class="bg-slate-900/90 border border-slate-700/80 rounded-xl text-xs px-3.5 py-2.5 text-slate-200 focus:outline-none focus:border-idid-400">
+                        <option value="ALL">All Accounts</option>
+                        <option value="@IDID_starship">@IDID_starship (Official)</option>
+                        <option value="@IDID_JP">@IDID_JP (Japan)</option>
+                        <option value="@STARSHIPent">@STARSHIPent</option>
+                        <option value="@MnetMcountdown">@MnetMcountdown</option>
+                        <option value="Fanposts">Fan & Community Posts</option>
+                    </select>
+
+                    <select id="twitterSortFilter" class="bg-slate-900/90 border border-slate-700/80 rounded-xl text-xs px-3.5 py-2.5 text-slate-200 focus:outline-none focus:border-idid-400">
+                        <option value="newest">Newest First</option>
+                        <option value="oldest">Oldest First</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="relative">
+                <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-3.5 text-slate-400"></i>
+                <input type="text" id="twitterSearch" placeholder="Search tweets, hashtags (#YOOCHAN), or account handles..." class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl text-xs pl-10 pr-4 py-3 text-slate-200 placeholder-slate-500 focus:outline-none focus:border-idid-400">
+            </div>
+
+            <div id="twitterFeed" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+        </section>
+
+        <!-- Tab 4: YouTube -->
+        <section id="youtube-section" class="tab-content hidden space-y-6">
+            <div class="glass-panel p-6 rounded-2xl border border-slate-800 space-y-4">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <h2 class="text-2xl sm:text-3xl font-display font-bold text-white flex items-center gap-3">
+                            <i data-lucide="youtube" class="w-8 h-8 text-red-500"></i> YouTube Vault
+                        </h2>
+                        <p class="text-slate-400 text-sm mt-1">Watch MVs, performance stages, behind-the-scenes, and Naldid content.</p>
+                    </div>
+
+                    <button id="addVideoBtn" class="flex items-center gap-2 bg-red-600 hover:bg-red-500 text-white px-4 py-2.5 rounded-xl font-medium text-sm transition-all shadow-lg shadow-red-600/20 w-fit">
+                        <i data-lucide="plus-circle" class="w-4 h-4"></i> Add YouTube Video
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+                    <div class="relative">
+                        <i data-lucide="search" class="w-4 h-4 absolute left-3 top-3.5 text-slate-400"></i>
+                        <input type="text" id="youtubeSearch" placeholder="Search title..." class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl text-xs pl-9 pr-3 py-3 text-slate-200 placeholder-slate-500 focus:outline-none focus:border-idid-400">
+                    </div>
+
+                    <select id="youtubeCategoryFilter" class="bg-slate-900/90 border border-slate-700/80 rounded-xl text-xs px-3.5 py-3 text-slate-200 focus:outline-none focus:border-idid-400">
+                        <option value="ALL">All Categories</option>
+                        <option value="MV">MV</option>
+                        <option value="Stage">Stage</option>
+                        <option value="Performance">Performance</option>
+                        <option value="Naldid">Naldid</option>
+                        <option value="Choreography">Choreography</option>
+                        <option value="Others">Others</option>
+                    </select>
+
+                    <select id="youtubeSortFilter" class="bg-slate-900/90 border border-slate-700/80 rounded-xl text-xs px-3.5 py-3 text-slate-200 focus:outline-none focus:border-idid-400">
+                        <option value="newest">Newest First</option>
+                        <option value="oldest">Oldest First</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="youtubeGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+
+        <!-- Tab 5: Bubble -->
+        <section id="bubble-section" class="tab-content hidden space-y-6">
+            <div class="glass-panel p-6 rounded-2xl border border-slate-800 text-center space-y-3 py-12 max-w-2xl mx-auto my-8">
+                <div class="w-16 h-16 rounded-2xl bg-idid-400/10 border border-idid-400/20 text-idid-400 flex items-center justify-center mx-auto">
+                    <i data-lucide="message-circle" class="w-8 h-8"></i>
+                </div>
+                <h3 class="text-xl font-display font-bold text-white">Bubble Archive Coming Soon</h3>
+                <p class="text-slate-300 text-xs sm:text-sm max-w-md mx-auto leading-relaxed">
+                    "Sorry, I don't have full access to everyone's Bubble. If you have full content of member's media, photos, videos, and voice messages, feel free to DM me!"
+                </p>
+            </div>
+        </section>
+
+        <!-- Tab 6: Instagram -->
+        <section id="instagram-section" class="tab-content hidden space-y-6">
+            <div class="glass-panel p-6 rounded-2xl border border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-display font-bold text-white flex items-center gap-3">
+                        <i data-lucide="instagram" class="w-8 h-8 text-idid-400"></i> Instagram Vault
+                    </h2>
+                    <p class="text-slate-400 text-sm mt-1">Photo carousels and official updates from @idid.did.idid.</p>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-3">
+                    <select id="instagramTagFilter" class="bg-slate-900/90 border border-slate-700/80 rounded-xl text-xs px-3.5 py-2.5 text-slate-200 focus:outline-none focus:border-idid-400">
+                        <option value="ALL">All Member Tags</option>
+                        <option value="#YONGHOON">#YONGHOON</option>
+                        <option value="#MINJAE">#MINJAE</option>
+                        <option value="#WONBIN">#WONBIN</option>
+                        <option value="#YOOCHAN">#YOOCHAN</option>
+                        <option value="#SEONGHYEON">#SEONGHYEON</option>
+                        <option value="#JUNHYUK">#JUNHYUK</option>
+                        <option value="#SEMIN">#SEMIN</option>
+                        <option value="#OT7">#OT7</option>
+                    </select>
+
+                    <select id="instagramSortFilter" class="bg-slate-900/90 border border-slate-700/80 rounded-xl text-xs px-3.5 py-2.5 text-slate-200 focus:outline-none focus:border-idid-400">
+                        <option value="newest">Newest First</option>
+                        <option value="oldest">Oldest First</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="relative">
+                <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-3.5 text-slate-400"></i>
+                <input type="text" id="instagramSearch" placeholder="Search caption or tags..." class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl text-xs pl-10 pr-4 py-3 text-slate-200 placeholder-slate-500 focus:outline-none focus:border-idid-400">
+            </div>
+
+            <div id="instagramGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        </section>
+
+        <!-- Tab 7: TikTok -->
+        <section id="tiktok-section" class="tab-content hidden space-y-6">
+            <div class="glass-panel p-6 rounded-2xl border border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-display font-bold text-white flex items-center gap-3">
+                        <svg class="w-8 h-8 fill-idid-400" viewBox="0 0 24 24">
+                            <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.29-2.58.74-5.18 2.67-6.85 1.58-1.38 3.69-2.1 5.78-2.02.05.01.1 0 .15.01v4.08c-.88-.08-1.78.13-2.51.62-.96.63-1.54 1.73-1.52 2.87.03 1.17.65 2.25 1.63 2.85.92.57 2.07.72 3.12.42.98-.27 1.83-.98 2.22-1.93.31-.73.43-1.54.41-2.33.02-4.05.01-8.1.02-12.15z"/>
+                        </svg>
+                        TikTok Archive
+                    </h2>
+                    <p class="text-slate-400 text-sm mt-1">Short clips, dance challenges, and funny behind-the-scenes moments.</p>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-3">
+                    <select id="tiktokMemberFilter" class="bg-slate-900/90 border border-slate-700/80 rounded-xl text-xs px-3.5 py-2.5 text-slate-200 focus:outline-none focus:border-idid-400">
+                        <option value="ALL">All Members</option>
+                        <option value="Jang Yonghoon">Jang Yonghoon</option>
+                        <option value="Kim Minjae">Kim Minjae</option>
+                        <option value="Park Wonbin">Park Wonbin</option>
+                        <option value="Chu Yoochan">Chu Yoochan</option>
+                        <option value="Park Seonghyeon">Park Seonghyeon</option>
+                        <option value="Baek Junhyuk">Baek Junhyuk</option>
+                        <option value="Jeong Semin">Jeong Semin</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="relative">
+                <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-3.5 text-slate-400"></i>
+                <input type="text" id="tiktokSearch" placeholder="Search TikTok title or member..." class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl text-xs pl-10 pr-4 py-3 text-slate-200 placeholder-slate-500 focus:outline-none focus:border-idid-400">
+            </div>
+
+            <div id="tiktokGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4"></div>
+        </section>
+
+        <!-- Tab 8: Others -->
+        <section id="others-section" class="tab-content hidden space-y-6">
+            <div class="glass-panel p-12 rounded-2xl border border-slate-800 text-center max-w-2xl mx-auto my-12 relative overflow-hidden">
+                <div class="absolute -top-12 -right-12 w-48 h-48 bg-idid-400/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="w-20 h-20 rounded-2xl bg-gradient-to-tr from-idid-600 via-idid-400 to-idid-glow flex items-center justify-center mx-auto mb-6 shadow-xl glow-bg">
+                    <i data-lucide="sparkles" class="w-10 h-10 text-slate-950"></i>
+                </div>
+                <h2 class="text-3xl font-display font-extrabold text-white mb-2">More Vaults Coming Soon</h2>
+                <p class="text-slate-400 text-sm max-w-md mx-auto mb-8">
+                    We are continuously building new archive modules for IDID fans worldwide! Stay tuned for upcoming sections.
+                </p>
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-idid-400/10 border border-idid-400/20 text-xs font-medium text-idid-400">
+                    <span class="w-2 h-2 rounded-full bg-idid-400 animate-pulse"></span>
+                    Development in Progress
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- MODALS -->
+    <div id="replyModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+        <div class="glass-panel w-full max-w-lg rounded-2xl border border-slate-800 overflow-hidden shadow-2xl relative max-h-[80vh] flex flex-col">
+            <div class="p-4 border-b border-slate-800/80 flex items-center justify-between">
+                <h3 class="text-sm font-bold text-white flex items-center gap-2">Comments & Replies</h3>
+                <button id="closeReplyModalBtn" class="text-slate-400 hover:text-white p-1 rounded-lg">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            <div id="replyThreadContainer" class="p-6 overflow-y-auto space-y-4"></div>
+        </div>
+    </div>
+
+    <div id="instaCarouselModal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+        <div class="glass-panel w-full max-w-xl rounded-2xl border border-slate-800 overflow-hidden shadow-2xl relative">
+            <div class="p-3 border-b border-slate-800 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <span class="text-xs font-bold text-slate-200">idid.did.idid</span>
+                    <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-idid-400 fill-idid-400/20"></i>
+                </div>
+                <button id="closeInstaModalBtn" class="text-slate-400 hover:text-white p-1">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            <div class="relative aspect-square bg-black flex items-center justify-center">
+                <img id="instaModalImage" src="" class="max-h-full max-w-full object-contain" />
+                <button id="instaPrevBtn" class="absolute left-3 p-2 rounded-full bg-slate-950/70 text-white hover:bg-idid-400 hover:text-slate-950">
+                    <i data-lucide="chevron-left" class="w-5 h-5"></i>
+                </button>
+                <button id="instaNextBtn" class="absolute right-3 p-2 rounded-full bg-slate-950/70 text-white hover:bg-idid-400 hover:text-slate-950">
+                    <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                </button>
+            </div>
+            <div class="p-4 border-t border-slate-800 space-y-2">
+                <p id="instaModalCaption" class="text-xs text-slate-300"></p>
+                <div id="instaModalTags" class="flex flex-wrap gap-1 text-[10px] text-idid-400"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="eventModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+        <div class="glass-panel w-full max-w-md rounded-2xl border border-slate-800 overflow-hidden shadow-2xl relative">
+            <div class="p-6 border-b border-slate-800/80 flex items-center justify-between">
+                <div id="eventModalTags" class="flex items-center gap-2"></div>
+                <button id="closeEventModalBtn" class="text-slate-400 hover:text-white p-1">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            <div class="p-6 space-y-4">
+                <h3 id="eventModalTitle" class="text-xl font-display font-bold text-white"></h3>
+                <div class="space-y-2 text-xs text-slate-300">
+                    <div class="flex items-center gap-2 text-slate-400">
+                        <i data-lucide="clock" class="w-4 h-4 text-idid-400"></i>
+                        <span id="eventModalTime"></span>
+                    </div>
+                    <div class="flex items-center gap-2 text-slate-400">
+                        <i data-lucide="map-pin" class="w-4 h-4 text-idid-400"></i>
+                        <span id="eventModalLocation"></span>
+                    </div>
+                </div>
+                <div id="eventModalDesc" class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 text-xs text-slate-300 leading-relaxed"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="addScheduleModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+        <div class="glass-panel w-full max-w-md rounded-2xl border border-slate-800 overflow-hidden shadow-2xl relative">
+            <div class="p-6 border-b border-slate-800/80 flex items-center justify-between">
+                <h3 class="text-lg font-display font-bold text-white flex items-center gap-2">
+                    <i data-lucide="calendar-plus" class="w-5 h-5 text-idid-400"></i> Add Schedule Item
+                </h3>
+                <button id="closeAddScheduleModalBtn" class="text-slate-400 hover:text-white p-1 rounded-lg">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            <form id="addScheduleForm" class="p-6 space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">Event Title</label>
+                    <input type="text" id="newScheduleTitle" required placeholder="e.g. IDID Soundwave Fansign" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-idid-400">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">Date</label>
+                        <input type="date" id="newScheduleDate" required class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-idid-400">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">Time (KST)</label>
+                        <input type="text" id="newScheduleTime" placeholder="18:00 KST" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-idid-400">
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">Tag/Category</label>
+                        <select id="newScheduleTag" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-idid-400">
+                            <option value="Fansign">Fansign</option>
+                            <option value="MusicShow">Music Show</option>
+                            <option value="Broadcast">Broadcast</option>
+                            <option value="Concert">Concert</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">Location / Venue</label>
+                        <input type="text" id="newScheduleLocation" placeholder="Seoul, Hall A" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-idid-400">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">Description / Details</label>
+                    <textarea id="newScheduleDesc" rows="3" placeholder="Enter details..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-idid-400"></textarea>
+                </div>
+                <div class="pt-2 flex justify-end gap-2">
+                    <button type="button" id="cancelScheduleBtn" class="px-4 py-2 rounded-xl bg-slate-800 text-xs text-slate-300 hover:text-white">Cancel</button>
+                    <button type="submit" class="px-4 py-2 rounded-xl bg-idid-400 hover:bg-idid-300 text-slate-950 text-xs font-bold shadow-lg">Save Event</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // DATA STORES (using explicit dates instead of relative time)
+        let scheduleEvents = [
+            { id: 1, title: "IDID Withmuu Fansign", date: "2026-11-01", time: "14:00 KST", location: "Withmuu Flagship Store", tag: "Fansign", desc: "Face-to-face fansign event for 'CHANRAN' album release." },
+            { id: 2, title: "Mnet M COUNTDOWN Live", date: "2026-11-05", time: "18:00 KST", location: "CJ ENM Center Studio", tag: "MusicShow", desc: "Live performance stage for 'PUSH BACK'." }
+        ];
+
+        let berrizPosts = [
+            {
+                id: 1,
+                isFanpost: true,
+                account: "Fanposts",
+                author: "Jang Yonghoon",
+                fanAuthor: "츄츄츄유유유찬찬찬",
+                fanAvatar: "W",
+                date: "Oct 17, 2026",
+                timestamp: 1760659200,
+                fanEnText: "Jang Yonghoon dummy",
+                fanKrText: "#to_jangyonghoon 장용훈바보",
+                tags: ["#YONGHOON"],
+                artistReply: {
+                    author: "Jang Yonghoon",
+                    avatar: "JY",
+                    date: "Oct 17, 2026",
+                    enText: "?",
+                    krText: "?"
+                }
+            },
+            {
+                id: 2,
+                isFanpost: false,
+                account: "@IDID_starship",
+                author: "IDID Official",
+                avatar: "ID",
+                date: "Oct 21, 2026",
+                timestamp: 1761004800,
+                enText: "Be careful not to catch a cold! 💫 #YOOCHAN",
+                krText: "감기 조심해 💫 #YOOCHAN",
+                image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=600&auto=format&fit=crop&q=80",
+                tags: ["#YOOCHAN", "#IDID"],
+                commentsAndReplies: [
+                    { type: "artist", author: "Chu Yoochan", avatar: "CYC", date: "Oct 21, 2026", enText: "I'll come again next time, I love you!", krText: "다음에 또 올게 사랑해!", krDate: "2026년 10월 21일" },
+                    { type: "artist", author: "Chu Yoochan", avatar: "CYC", date: "Oct 21, 2026", enText: "What is 'chu-gwi-ja', date me??", krText: "추귀자는 뭐야 사귀자고??", krDate: "2026년 10월 21일" },
+                    { type: "artist", author: "Chu Yoochan", avatar: "CYC", date: "Oct 21, 2026", enText: "The love I want to give right now is at max though????????????", krText: "내가 지금 막 주고 싶은 사랑이 맥스인데???????????????????", krDate: "2026년 10월 21일" },
+                    { 
+                        type: "fan_thread", 
+                        fanAuthor: "mr수_보호사", 
+                        fanAvatar: "F", 
+                        fanDate: "Oct 21, 2026", 
+                        fanEnText: "I'm not a doctor, but I can see your left shoulder... Please let me be by your side when it's time to sleep.", 
+                        fanKrText: "의사는 아니지만, 당신의 왼쪽 어깨가... 잘 시간이 되면 제가 꼭 당신 곁에 있게 해주세요.", 
+                        fanImage: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&auto=format&fit=crop&q=80",
+                        artistAuthor: "Chu Yoochan", 
+                        artistAvatar: "CYC", 
+                        artistDate: "Oct 21, 2026", 
+                        artistEnText: "Is that what you felt while watching the video usually?", 
+                        artistKrText: "평소에 영상보고 느끼신 건가"
+                    }
+                ]
+            }
+        ];
+
+        let instagramPosts = [
+            {
+                id: 1,
+                date: "Oct 22, 2026",
+                timestamp: 1761091200,
+                caption: "Golden hour glow ✨",
+                images: [
+                    "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&auto=format&fit=crop&q=80",
+                    "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=600&auto=format&fit=crop&q=80"
+                ],
+                tags: ["#WONBIN", "#OT7"]
+            }
+        ];
+
+        let youtubeVideos = [
+            { id: 1, title: "IDID - 'CHANRAN' Official MV", youtubeId: "dQw4w9WgXcQ", category: "MV", date: "Oct 01, 2026", timestamp: 1759276800, views: "12.4M views", thumbnail: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600&auto=format&fit=crop&q=80" }
+        ];
+
+        let tiktokPosts = [
+            { id: 1, member: "Park Wonbin", title: "Dance challenge with Semin! 🕺", date: "Oct 20, 2026", timestamp: 1760918400, thumbnail: "https://images.unsplash.com/photo-1547153760-18fc86324498?w=600&auto=format&fit=crop&q=80" }
+        ];
+
+        let currentCalYear = 2026;
+        let currentCalMonth = 10;
+
+        document.addEventListener("DOMContentLoaded", () => {
+            lucide.createIcons();
+            setupNavigation();
+            setupCalendarControls();
+            setupSearchAndFilters();
+            renderCalendar();
+            renderScheduleList();
+            renderBerriz();
+            renderTwitter();
+            renderYouTube();
+            renderInstagram();
+            renderTikTok();
+            setupModals();
+        });
+
+        function setupNavigation() {
+            const tabs = document.querySelectorAll('.nav-tab');
+            const contents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const target = tab.getAttribute('data-tab');
+                    tabs.forEach(t => t.classList.remove('text-idid-400', 'bg-idid-400/10', 'border', 'border-idid-400/30'));
+                    tab.classList.add('text-idid-400', 'bg-idid-400/10', 'border', 'border-idid-400/30');
+                    contents.forEach(c => c.classList.add('hidden'));
+                    document.getElementById(`${target}-section`).classList.remove('hidden');
+                });
+            });
+
+            const calViewBtn = document.getElementById('calendarViewBtn');
+            const listViewBtn = document.getElementById('listViewBtn');
+            const calView = document.getElementById('calendarView');
+            const listView = document.getElementById('listView');
+
+            calViewBtn.addEventListener('click', () => {
+                calView.classList.remove('hidden');
+                listView.classList.add('hidden');
+                calViewBtn.className = "px-3 py-1.5 rounded-lg text-xs font-bold bg-idid-400 text-slate-950 transition-all";
+                listViewBtn.className = "px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition-all";
+            });
+
+            listViewBtn.addEventListener('click', () => {
+                listView.classList.remove('hidden');
+                calView.classList.add('hidden');
+                listViewBtn.className = "px-3 py-1.5 rounded-lg text-xs font-bold bg-idid-400 text-slate-950 transition-all";
+                calViewBtn.className = "px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition-all";
+            });
+        }
+
+        function setupCalendarControls() {
+            document.getElementById('prevMonthBtn').addEventListener('click', () => {
+                currentCalMonth--;
+                if(currentCalMonth < 0) { currentCalMonth = 11; currentCalYear--; }
+                renderCalendar();
+            });
+            document.getElementById('nextMonthBtn').addEventListener('click', () => {
+                currentCalMonth++;
+                if(currentCalMonth > 11) { currentCalMonth = 0; currentCalYear++; }
+                renderCalendar();
+            });
+        }
+
+        function setupSearchAndFilters() {
+            document.getElementById('scheduleTagFilter').addEventListener('change', renderScheduleList);
+            document.getElementById('scheduleSearch').addEventListener('input', renderScheduleList);
+
+            document.getElementById('berrizMemberFilter').addEventListener('change', renderBerriz);
+            document.getElementById('berrizSortFilter').addEventListener('change', renderBerriz);
+            document.getElementById('berrizSearch').addEventListener('input', renderBerriz);
+
+            document.getElementById('twitterAccountFilter').addEventListener('change', renderTwitter);
+            document.getElementById('twitterSortFilter').addEventListener('change', renderTwitter);
+            document.getElementById('twitterSearch').addEventListener('input', renderTwitter);
+
+            document.getElementById('youtubeCategoryFilter').addEventListener('change', renderYouTube);
+            document.getElementById('youtubeSortFilter').addEventListener('change', renderYouTube);
+            document.getElementById('youtubeSearch').addEventListener('input', renderYouTube);
+
+            document.getElementById('instagramTagFilter').addEventListener('change', renderInstagram);
+            document.getElementById('instagramSortFilter').addEventListener('change', renderInstagram);
+            document.getElementById('instagramSearch').addEventListener('input', renderInstagram);
+
+            document.getElementById('tiktokMemberFilter').addEventListener('change', renderTikTok);
+            document.getElementById('tiktokSearch').addEventListener('input', renderTikTok);
+        }
+
+        function renderCalendar() {
+            const grid = document.getElementById('calendarGrid');
+            if(!grid) return;
+            grid.innerHTML = '';
+            const dateObj = new Date(currentCalYear, currentCalMonth, 1);
+            const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            document.getElementById('currentMonthYear').innerText = `${monthNames[currentCalMonth]} ${currentCalYear}`;
+            const firstDayIndex = dateObj.getDay();
+            const daysInMonth = new Date(currentCalYear, currentCalMonth + 1, 0).getDate();
+
+            for(let i = 0; i < firstDayIndex; i++) {
+                const emptyCell = document.createElement('div');
+                emptyCell.className = "h-20 sm:h-24 rounded-xl bg-slate-900/20 border border-slate-800/30 opacity-30";
+                grid.appendChild(emptyCell);
+            }
+
+            for(let day = 1; day <= daysInMonth; day++) {
+                const dayCell = document.createElement('div');
+                dayCell.className = "h-20 sm:h-24 p-1.5 sm:p-2 rounded-xl glass-card flex flex-col justify-between hover:border-idid-400/60 cursor-pointer transition-all";
+                const dayStr = `${currentCalYear}-${String(currentCalMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                
+                const dayNum = document.createElement('span');
+                dayNum.className = "text-xs font-semibold text-slate-300";
+                dayNum.innerText = day;
+                dayCell.appendChild(dayNum);
+
+                const query = document.getElementById('scheduleSearch').value.toLowerCase();
+                const dayEvents = scheduleEvents.filter(e => e.date === dayStr && (
+                    e.title.toLowerCase().includes(query) ||
+                    e.location.toLowerCase().includes(query) ||
+                    e.desc.toLowerCase().includes(query)
+                ));
+
+                const eventsContainer = document.createElement('div');
+                eventsContainer.className = "space-y-1 overflow-y-auto max-h-14";
+
+                dayEvents.forEach(evt => {
+                    const badge = document.createElement('div');
+                    badge.className = "text-[10px] truncate px-1.5 py-0.5 rounded border bg-idid-400/20 text-idid-300 border-idid-400/40 font-medium";
+                    badge.innerText = evt.title;
+                    badge.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        openEventModal(evt);
+                    });
+                    eventsContainer.appendChild(badge);
+                });
+                dayCell.appendChild(eventsContainer);
+                grid.appendChild(dayCell);
+            }
+        }
+
+        function renderScheduleList() {
+            renderCalendar();
+            const container = document.getElementById('scheduleListContainer');
+            if(!container) return;
+            const selectedTag = document.getElementById('scheduleTagFilter').value;
+            const query = document.getElementById('scheduleSearch').value.toLowerCase();
+            container.innerHTML = '';
+
+            let filtered = scheduleEvents.filter(e => {
+                const matchesTag = selectedTag === 'ALL' || e.tag === selectedTag;
+                const matchesSearch = e.title.toLowerCase().includes(query) || e.location.toLowerCase().includes(query) || e.desc.toLowerCase().includes(query);
+                return matchesTag && matchesSearch;
+            });
+
+            if(filtered.length === 0) {
+                container.innerHTML = `<div class="text-center py-8 text-slate-500 text-xs">No schedule events found.</div>`;
+                return;
+            }
+
+            filtered.forEach(evt => {
+                const item = document.createElement('div');
+                item.className = "p-4 rounded-xl glass-card flex items-center justify-between gap-3 border border-slate-800 cursor-pointer";
+                item.innerHTML = `
+                    <div class="space-y-1">
+                        <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-idid-400/20 text-idid-400 border border-idid-400/30">#${evt.tag}</span>
+                        <h4 class="text-sm font-bold text-slate-100">${evt.title}</h4>
+                        <p class="text-xs text-slate-400">${evt.date} • ${evt.location}</p>
+                    </div>
+                `;
+                item.addEventListener('click', () => openEventModal(evt));
+                container.appendChild(item);
+            });
+        }
+
+        function openEventModal(evt) {
+            document.getElementById('eventModalTitle').innerText = evt.title;
+            document.getElementById('eventModalTime').innerText = `${evt.date} • ${evt.time}`;
+            document.getElementById('eventModalLocation').innerText = evt.location;
+            document.getElementById('eventModalDesc').innerText = evt.desc;
+            document.getElementById('eventModalTags').innerHTML = `<span class="px-2.5 py-1 rounded-md text-xs font-semibold bg-idid-400/20 text-idid-300 border border-idid-400/40">#${evt.tag}</span>`;
+            document.getElementById('eventModal').classList.remove('hidden');
+        }
+
+        function renderBerriz() {
+            const container = document.getElementById('berrizFeed');
+            if(!container) return;
+            container.innerHTML = '';
+
+            const selectedMember = document.getElementById('berrizMemberFilter').value;
+            const sortOrder = document.getElementById('berrizSortFilter').value;
+            const query = document.getElementById('berrizSearch').value.toLowerCase();
+
+            let filtered = berrizPosts.filter(post => {
+                const matchesMember = selectedMember === 'ALL' || post.author === selectedMember;
+                const contentStr = post.isFanpost ? (post.fanEnText + " " + post.artistReply.enText) : (post.enText);
+                const matchesSearch = contentStr.toLowerCase().includes(query) || post.tags.some(t => t.toLowerCase().includes(query));
+                return matchesMember && matchesSearch;
+            });
+
+            filtered.sort((a, b) => {
+                if(sortOrder === 'newest') return b.timestamp - a.timestamp;
+                return a.timestamp - b.timestamp;
+            });
+
+            if(filtered.length === 0) {
+                container.innerHTML = `<div class="col-span-2 text-center py-12 text-slate-500 text-xs">No posts found for this filter.</div>`;
+                return;
+            }
+
+            filtered.forEach(post => {
+                const card = document.createElement('div');
+                card.className = "glass-card p-5 rounded-2xl border border-slate-800 space-y-4 flex flex-col justify-between";
+
+                if(post.isFanpost) {
+                    card.innerHTML = `
+                        <div class="space-y-3">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-full bg-idid-400/20 text-idid-400 flex items-center justify-center font-bold text-xs border border-idid-400/30">
+                                    ${post.fanAvatar}
+                                </div>
+                                <div>
+                                    <h4 class="text-xs font-bold text-slate-200">${post.fanAuthor}</h4>
+                                    <p class="text-[10px] text-slate-400">${post.date}</p>
+                                </div>
+                            </div>
+                            <div class="space-y-1">
+                                <p class="text-xs text-slate-200 leading-relaxed fan-text">${post.fanEnText}</p>
+                                <button class="text-[10px] font-semibold text-idid-400 hover:underline fan-trans-btn" data-state="en">Original</button>
+                            </div>
+
+                            <div class="p-3.5 rounded-xl bg-slate-900/90 border border-idid-400/30 space-y-2 mt-2">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-6 h-6 rounded-full bg-gradient-to-tr from-idid-600 to-idid-400 text-slate-950 flex items-center justify-center font-bold text-[10px]">
+                                        ${post.artistReply.avatar}
+                                    </div>
+                                    <span class="text-xs font-bold text-slate-100">${post.artistReply.author}</span>
+                                    <span class="text-[10px] text-slate-400 ml-auto">${post.artistReply.date}</span>
+                                </div>
+                                <p class="text-xs text-slate-200 pl-8 artist-text">${post.artistReply.enText}</p>
+                            </div>
+                        </div>
+                        <div class="pt-3 border-t border-slate-800 flex items-center justify-between">
+                            <div class="flex flex-wrap gap-1 text-[10px] text-idid-400 font-semibold">${post.tags.join(' ')}</div>
+                        </div>
+                    `;
+
+                    const fanTransBtn = card.querySelector('.fan-trans-btn');
+                    const fanTextElem = card.querySelector('.fan-text');
+                    const artistTextElem = card.querySelector('.artist-text');
+
+                    fanTransBtn.addEventListener('click', () => {
+                        if(fanTransBtn.getAttribute('data-state') === 'en') {
+                            fanTextElem.innerText = post.fanKrText;
+                            artistTextElem.innerText = post.artistReply.krText;
+                            fanTransBtn.innerText = "Translate";
+                            fanTransBtn.setAttribute('data-state', 'kr');
+                        } else {
+                            fanTextElem.innerText = post.fanEnText;
+                            artistTextElem.innerText = post.artistReply.enText;
+                            fanTransBtn.innerText = "Original";
+                            fanTransBtn.setAttribute('data-state', 'en');
+                        }
+                    });
+
+                } else {
+                    card.innerHTML = `
+                        <div class="space-y-3">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-idid-600 to-idid-400 text-slate-950 flex items-center justify-center font-bold text-xs">
+                                    ${post.avatar}
+                                </div>
+                                <div>
+                                    <h4 class="text-xs font-bold text-slate-200">${post.author}</h4>
+                                    <p class="text-[10px] text-slate-400">${post.date}</p>
+                                </div>
+                            </div>
+                            <div class="space-y-1">
+                                <p class="text-xs text-slate-200 leading-relaxed main-text">${post.enText}</p>
+                                <button class="text-[10px] font-semibold text-idid-400 hover:underline main-trans-btn" data-state="en">Original</button>
+                            </div>
+                            ${post.image ? `<img src="${post.image}" class="w-full h-48 object-cover rounded-xl border border-slate-800" />` : ''}
+                        </div>
+
+                        <div class="pt-3 border-t border-slate-800 flex items-center justify-between">
+                            <div class="flex flex-wrap gap-1 text-[10px] text-idid-400 font-semibold">${post.tags.join(' ')}</div>
+                            <button class="open-reply-btn text-xs text-slate-400 hover:text-idid-400 flex items-center gap-1">
+                                <i data-lucide="message-square" class="w-3.5 h-3.5"></i> ${post.commentsAndReplies.length} comments
+                            </button>
+                        </div>
+                    `;
+
+                    const mainTransBtn = card.querySelector('.main-trans-btn');
+                    const mainTextElem = card.querySelector('.main-text');
+
+                    mainTransBtn.addEventListener('click', () => {
+                        if(mainTransBtn.getAttribute('data-state') === 'en') {
+                            mainTextElem.innerText = post.krText;
+                            mainTransBtn.innerText = "Translate";
+                            mainTransBtn.setAttribute('data-state', 'kr');
+                        } else {
+                            mainTextElem.innerText = post.enText;
+                            mainTransBtn.innerText = "Original";
+                            mainTransBtn.setAttribute('data-state', 'en');
+                        }
+                    });
+
+                    card.querySelector('.open-reply-btn').addEventListener('click', () => openReplyModal(post));
+                }
+
+                container.appendChild(card);
+            });
+            lucide.createIcons();
+        }
+
+        function renderTwitter() {
+            const container = document.getElementById('twitterFeed');
+            if(!container) return;
+            container.innerHTML = '';
+
+            const selectedAccount = document.getElementById('twitterAccountFilter').value;
+            const sortOrder = document.getElementById('twitterSortFilter').value;
+            const query = document.getElementById('twitterSearch').value.toLowerCase();
+
+            let filtered = berrizPosts.filter(post => {
+                const matchesAccount = selectedAccount === 'ALL' || post.account === selectedAccount;
+                const contentStr = post.isFanpost ? (post.fanEnText + " " + post.artistReply.enText) : (post.enText);
+                const matchesSearch = contentStr.toLowerCase().includes(query) || post.tags.some(t => t.toLowerCase().includes(query)) || (post.account && post.account.toLowerCase().includes(query));
+                return matchesAccount && matchesSearch;
+            });
+
+            filtered.sort((a, b) => {
+                if(sortOrder === 'newest') return b.timestamp - a.timestamp;
+                return a.timestamp - b.timestamp;
+            });
+
+            if(filtered.length === 0) {
+                container.innerHTML = `<div class="col-span-2 text-center py-12 text-slate-500 text-xs">No tweets found for this filter.</div>`;
+                return;
+            }
+
+            filtered.forEach(post => {
+                const card = document.createElement('div');
+                card.className = "glass-card p-5 rounded-2xl border border-slate-800 space-y-4 flex flex-col justify-between";
+
+                if(post.isFanpost) {
+                    card.innerHTML = `
+                        <div class="space-y-3">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-full bg-idid-400/20 text-idid-400 flex items-center justify-center font-bold text-xs border border-idid-400/30">
+                                    ${post.fanAvatar}
+                                </div>
+                                <div>
+                                    <h4 class="text-xs font-bold text-slate-200">${post.fanAuthor}</h4>
+                                    <p class="text-[10px] text-slate-400">${post.date}</p>
+                                </div>
+                            </div>
+                            <div class="space-y-1">
+                                <p class="text-xs text-slate-200 leading-relaxed fan-text">${post.fanEnText}</p>
+                                <button class="text-[10px] font-semibold text-idid-400 hover:underline fan-trans-btn" data-state="en">Original</button>
+                            </div>
+
+                            <div class="p-3.5 rounded-xl bg-slate-900/90 border border-idid-400/30 space-y-2 mt-2">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-6 h-6 rounded-full bg-gradient-to-tr from-idid-600 to-idid-400 text-slate-950 flex items-center justify-center font-bold text-[10px]">
+                                        ${post.artistReply.avatar}
+                                    </div>
+                                    <span class="text-xs font-bold text-slate-100">${post.artistReply.author}</span>
+                                    <span class="text-[10px] text-slate-400 ml-auto">${post.artistReply.date}</span>
+                                </div>
+                                <p class="text-xs text-slate-200 pl-8 artist-text">${post.artistReply.enText}</p>
+                            </div>
+                        </div>
+                        <div class="pt-3 border-t border-slate-800 flex items-center justify-between">
+                            <div class="flex flex-wrap gap-1 text-[10px] text-idid-400 font-semibold">${post.tags.join(' ')}</div>
+                        </div>
+                    `;
+
+                    const fanTransBtn = card.querySelector('.fan-trans-btn');
+                    const fanTextElem = card.querySelector('.fan-text');
+                    const artistTextElem = card.querySelector('.artist-text');
+
+                    fanTransBtn.addEventListener('click', () => {
+                        if(fanTransBtn.getAttribute('data-state') === 'en') {
+                            fanTextElem.innerText = post.fanKrText;
+                            artistTextElem.innerText = post.artistReply.krText;
+                            fanTransBtn.innerText = "Translate";
+                            fanTransBtn.setAttribute('data-state', 'kr');
+                        } else {
+                            fanTextElem.innerText = post.fanEnText;
+                            artistTextElem.innerText = post.artistReply.enText;
+                            fanTransBtn.innerText = "Original";
+                            fanTransBtn.setAttribute('data-state', 'en');
+                        }
+                    });
+
+                } else {
+                    card.innerHTML = `
+                        <div class="space-y-3">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-idid-600 to-idid-400 text-slate-950 flex items-center justify-center font-bold text-xs">
+                                    ${post.avatar}
+                                </div>
+                                <div>
+                                    <h4 class="text-xs font-bold text-slate-200 flex items-center gap-1.5">
+                                        ${post.author} 
+                                        <span class="text-[10px] text-idid-400 font-normal">${post.account}</span>
+                                    </h4>
+                                    <p class="text-[10px] text-slate-400">${post.date}</p>
+                                </div>
+                            </div>
+                            <div class="space-y-1">
+                                <p class="text-xs text-slate-200 leading-relaxed main-text">${post.enText}</p>
+                                <button class="text-[10px] font-semibold text-idid-400 hover:underline main-trans-btn" data-state="en">Original</button>
+                            </div>
+                            ${post.image ? `<img src="${post.image}" class="w-full h-48 object-cover rounded-xl border border-slate-800" />` : ''}
+                        </div>
+
+                        <div class="pt-3 border-t border-slate-800 flex items-center justify-between">
+                            <div class="flex flex-wrap gap-1 text-[10px] text-idid-400 font-semibold">${post.tags.join(' ')}</div>
+                            <button class="open-reply-btn text-xs text-slate-400 hover:text-idid-400 flex items-center gap-1">
+                                <i data-lucide="message-square" class="w-3.5 h-3.5"></i> ${post.commentsAndReplies.length} comments
+                            </button>
+                        </div>
+                    `;
+
+                    const mainTransBtn = card.querySelector('.main-trans-btn');
+                    const mainTextElem = card.querySelector('.main-text');
+
+                    mainTransBtn.addEventListener('click', () => {
+                        if(mainTransBtn.getAttribute('data-state') === 'en') {
+                            mainTextElem.innerText = post.krText;
+                            mainTransBtn.innerText = "Translate";
+                            mainTransBtn.setAttribute('data-state', 'kr');
+                        } else {
+                            mainTextElem.innerText = post.enText;
+                            mainTransBtn.innerText = "Original";
+                            mainTransBtn.setAttribute('data-state', 'en');
+                        }
+                    });
+
+                    card.querySelector('.open-reply-btn').addEventListener('click', () => openReplyModal(post));
+                }
+
+                container.appendChild(card);
+            });
+            lucide.createIcons();
+        }
+
+        function openReplyModal(post) {
+            const container = document.getElementById('replyThreadContainer');
+            container.innerHTML = '';
+
+            post.commentsAndReplies.forEach(item => {
+                const elem = document.createElement('div');
+                if(item.type === 'artist') {
+                    elem.className = "p-3.5 rounded-xl bg-slate-900/90 border border-slate-800 space-y-1 ml-4 border-l-2 border-l-idid-400";
+                    elem.innerHTML = `
+                        <div class="flex items-center gap-2">
+                            <div class="w-5 h-5 rounded-full bg-idid-400 text-slate-950 flex items-center justify-center font-bold text-[9px]">${item.avatar}</div>
+                            <span class="text-[11px] font-bold text-slate-200">${item.author}</span>
+                            <span class="text-[9px] text-slate-500 ml-auto">${item.date}</span>
+                        </div>
+                        <div class="space-y-1 pl-7">
+                            <p class="text-xs text-slate-300 comment-text">${item.enText}</p>
+                            <button class="text-[10px] font-semibold text-idid-400 hover:underline comment-trans-btn" data-state="en">Original</button>
+                        </div>
+                    `;
+
+                    const transBtn = elem.querySelector('.comment-trans-btn');
+                    const textElem = elem.querySelector('.comment-text');
+                    transBtn.addEventListener('click', () => {
+                        if(transBtn.getAttribute('data-state') === 'en') {
+                            textElem.innerText = item.krText;
+                            transBtn.innerText = "Translate";
+                            transBtn.setAttribute('data-state', 'kr');
+                        } else {
+                            textElem.innerText = item.enText;
+                            transBtn.innerText = "Original";
+                            transBtn.setAttribute('data-state', 'en');
+                        }
+                    });
+
+                } else {
+                    elem.className = "p-3.5 rounded-xl bg-slate-900/90 border border-slate-800 space-y-3";
+                    elem.innerHTML = `
+                        <div class="space-y-1">
+                            <div class="flex items-center gap-2">
+                                <div class="w-6 h-6 rounded-full bg-slate-800 text-slate-300 flex items-center justify-center font-bold text-[10px]">${item.fanAvatar}</div>
+                                <span class="text-xs font-bold text-slate-300">${item.fanAuthor}</span>
+                                <span class="text-[10px] text-slate-500 ml-auto">${item.fanDate}</span>
+                            </div>
+                            <div class="space-y-1 pl-8">
+                                <p class="text-xs text-slate-300 fan-comment-text">${item.fanEnText}</p>
+                                <button class="text-[10px] font-semibold text-idid-400 hover:underline fan-comment-trans-btn" data-state="en">Original</button>
+                            </div>
+                            ${item.fanImage ? `<img src="${item.fanImage}" class="w-32 h-20 object-cover rounded-lg border border-slate-800 ml-8 mt-1" />` : ''}
+                        </div>
+                        <div class="p-2.5 rounded-lg bg-slate-950/80 border border-idid-400/30 space-y-1 ml-6 border-l-2 border-l-idid-400">
+                            <div class="flex items-center gap-2">
+                                <div class="w-5 h-5 rounded-full bg-idid-400 text-slate-950 flex items-center justify-center font-bold text-[9px]">${item.artistAvatar}</div>
+                                <span class="text-[11px] font-bold text-slate-200">${item.artistAuthor}</span>
+                                <span class="text-[9px] text-slate-500 ml-auto">${item.artistDate}</span>
+                            </div>
+                            <div class="space-y-1 pl-7">
+                                <p class="text-xs text-slate-200 artist-reply-text">${item.artistEnText}</p>
+                                <button class="text-[10px] font-semibold text-idid-400 hover:underline artist-reply-trans-btn" data-state="en">Original</button>
+                            </div>
+                        </div>
+                    `;
+
+                    const fanTransBtn = elem.querySelector('.fan-comment-trans-btn');
+                    const fanTextElem = elem.querySelector('.fan-comment-text');
+                    fanTransBtn.addEventListener('click', () => {
+                        if(fanTransBtn.getAttribute('data-state') === 'en') {
+                            fanTextElem.innerText = item.fanKrText;
+                            fanTransBtn.innerText = "Translate";
+                            fanTransBtn.setAttribute('data-state', 'kr');
+                        } else {
+                            fanTextElem.innerText = item.fanEnText;
+                            fanTransBtn.innerText = "Original";
+                            fanTransBtn.setAttribute('data-state', 'en');
+                        }
+                    });
+
+                    const artistTransBtn = elem.querySelector('.artist-reply-trans-btn');
+                    const artistTextElem = elem.querySelector('.artist-reply-text');
+                    artistTransBtn.addEventListener('click', () => {
+                        if(artistTransBtn.getAttribute('data-state') === 'en') {
+                            artistTextElem.innerText = item.artistKrText;
+                            artistTransBtn.innerText = "Translate";
+                            artistTransBtn.setAttribute('data-state', 'kr');
+                        } else {
+                            artistTextElem.innerText = item.artistEnText;
+                            artistTransBtn.innerText = "Original";
+                            artistTransBtn.setAttribute('data-state', 'en');
+                        }
+                    });
+                }
+                container.appendChild(elem);
+            });
+
+            document.getElementById('replyModal').classList.remove('hidden');
+        }
+
+        function renderYouTube() {
+            const container = document.getElementById('youtubeGrid');
+            if(!container) return;
+            const query = document.getElementById('youtubeSearch').value.toLowerCase();
+            const category = document.getElementById('youtubeCategoryFilter').value;
+            container.innerHTML = '';
+
+            let filtered = youtubeVideos.filter(v => {
+                const matchesCat = category === 'ALL' || v.category === category;
+                const matchesQuery = v.title.toLowerCase().includes(query);
+                return matchesCat && matchesQuery;
+            });
+
+            if(filtered.length === 0) {
+                container.innerHTML = `<div class="col-span-3 text-center py-12 text-slate-500 text-xs">No videos found.</div>`;
+                return;
+            }
+
+            filtered.forEach(v => {
+                const card = document.createElement('div');
+                card.className = "glass-card rounded-2xl border border-slate-800 overflow-hidden flex flex-col justify-between group cursor-pointer";
+                card.innerHTML = `
+                    <div class="relative aspect-video bg-slate-900 overflow-hidden">
+                        <img src="${v.thumbnail}" class="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+                        <span class="absolute top-2 left-2 px-2 py-0.5 rounded text-[10px] font-bold bg-slate-950/80 text-white">${v.category}</span>
+                    </div>
+                    <div class="p-4"><h4 class="text-xs font-bold text-slate-200 line-clamp-2">${v.title}</h4><span class="text-[10px] text-slate-400 mt-1 block">${v.date}</span></div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        let currentCarouselImgIdx = 0;
+        let currentInstaPost = null;
+
+        function renderInstagram() {
+            const container = document.getElementById('instagramGrid');
+            if(!container) return;
+            const query = document.getElementById('instagramSearch').value.toLowerCase();
+            const selectedTag = document.getElementById('instagramTagFilter').value;
+            container.innerHTML = '';
+
+            let filtered = instagramPosts.filter(post => {
+                const matchesTag = selectedTag === 'ALL' || post.tags.includes(selectedTag);
+                const matchesQuery = post.caption.toLowerCase().includes(query) || post.tags.some(t => t.toLowerCase().includes(query));
+                return matchesTag && matchesQuery;
+            });
+
+            if(filtered.length === 0) {
+                container.innerHTML = `<div class="col-span-3 text-center py-12 text-slate-500 text-xs">No Instagram posts found.</div>`;
+                return;
+            }
+
+            filtered.forEach(post => {
+                const card = document.createElement('div');
+                card.className = "glass-card rounded-2xl border border-slate-800 overflow-hidden cursor-pointer";
+                card.innerHTML = `
+                    <div class="p-3 border-b border-slate-800 flex items-center justify-between">
+                        <div class="flex items-center gap-2"><span class="text-xs font-bold text-slate-200">idid.did.idid</span><i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-idid-400 fill-idid-400/20"></i></div>
+                        <span class="text-[10px] text-slate-400">${post.date}</span>
+                    </div>
+                    <div class="relative aspect-square bg-slate-900">
+                        <img src="${post.images[0]}" class="w-full h-full object-cover" />
+                        ${post.images.length > 1 ? `<div class="absolute top-2 right-2 p-1.5 rounded-lg bg-slate-950/70 text-white"><i data-lucide="layers" class="w-4 h-4"></i></div>` : ''}
+                    </div>
+                    <div class="p-4 space-y-2">
+                        <p class="text-xs text-slate-300 line-clamp-2">${post.caption}</p>
+                        <div class="flex flex-wrap gap-1 text-[10px] text-idid-400 font-semibold">${post.tags.join(' ')}</div>
+                    </div>
+                `;
+                card.addEventListener('click', () => openInstaModal(post));
+                container.appendChild(card);
+            });
+            lucide.createIcons();
+        }
+
+        function openInstaModal(post) {
+            currentInstaPost = post;
+            currentCarouselImgIdx = 0;
+            updateInstaModalImg();
+            document.getElementById('instaModalCaption').innerText = post.caption;
+            document.getElementById('instaModalTags').innerText = post.tags.join(' ');
+            document.getElementById('instaCarouselModal').classList.remove('hidden');
+        }
+
+        function updateInstaModalImg() {
+            document.getElementById('instaModalImage').src = currentInstaPost.images[currentCarouselImgIdx];
+            document.getElementById('instaPrevBtn').style.display = currentInstaPost.images.length > 1 ? 'block' : 'none';
+            document.getElementById('instaNextBtn').style.display = currentInstaPost.images.length > 1 ? 'block' : 'none';
+        }
+
+        function renderTikTok() {
+            const container = document.getElementById('tiktokGrid');
+            if(!container) return;
+            const query = document.getElementById('tiktokSearch').value.toLowerCase();
+            const selectedMember = document.getElementById('tiktokMemberFilter').value;
+            container.innerHTML = '';
+
+            let filtered = tiktokPosts.filter(t => {
+                const matchesMember = selectedMember === 'ALL' || t.member === selectedMember;
+                const matchesQuery = t.title.toLowerCase().includes(query) || t.member.toLowerCase().includes(query);
+                return matchesMember && matchesQuery;
+            });
+
+            if(filtered.length === 0) {
+                container.innerHTML = `<div class="col-span-4 text-center py-12 text-slate-500 text-xs">No TikTok videos found.</div>`;
+                return;
+            }
+
+            filtered.forEach(t => {
+                const card = document.createElement('div');
+                card.className = "glass-card rounded-2xl border border-slate-800 overflow-hidden flex flex-col justify-between group cursor-pointer";
+                card.innerHTML = `
+                    <div class="relative aspect-[9/16] bg-slate-900 overflow-hidden">
+                        <img src="${t.thumbnail}" class="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+                        <div class="absolute inset-0 bg-slate-950/30 flex items-center justify-center"><i data-lucide="play" class="w-8 h-8 text-white fill-current"></i></div>
+                    </div>
+                    <div class="p-3"><h4 class="text-xs font-bold text-slate-200 line-clamp-1">${t.member}</h4><p class="text-[10px] text-slate-400 line-clamp-1 mt-0.5">${t.title}</p></div>
+                `;
+                container.appendChild(card);
+            });
+            lucide.createIcons();
+        }
+
+        function setupModals() {
+            document.getElementById('closeReplyModalBtn').addEventListener('click', () => document.getElementById('replyModal').classList.add('hidden'));
+            document.getElementById('closeInstaModalBtn').addEventListener('click', () => document.getElementById('instaCarouselModal').classList.add('hidden'));
+            document.getElementById('closeEventModalBtn').addEventListener('click', () => document.getElementById('eventModal').classList.add('hidden'));
+            document.getElementById('closeAddScheduleModalBtn').addEventListener('click', () => document.getElementById('addScheduleModal').classList.add('hidden'));
+            document.getElementById('cancelScheduleBtn').addEventListener('click', () => document.getElementById('addScheduleModal').classList.add('hidden'));
+            document.getElementById('addEventBtn').addEventListener('click', () => document.getElementById('addScheduleModal').classList.remove('hidden'));
+
+            document.getElementById('instaCarouselModal').addEventListener('click', (e) => {
+                if(e.target === document.getElementById('instaCarouselModal')) {
+                    document.getElementById('instaCarouselModal').classList.add('hidden');
+                }
+            });
+
+            document.getElementById('replyModal').addEventListener('click', (e) => {
+                if(e.target === document.getElementById('replyModal')) {
+                    document.getElementById('replyModal').classList.add('hidden');
+                }
+            });
+
+            document.getElementById('eventModal').addEventListener('click', (e) => {
+                if(e.target === document.getElementById('eventModal')) {
+                    document.getElementById('eventModal').classList.add('hidden');
+                }
+            });
+
+            document.getElementById('instaPrevBtn').addEventListener('click', () => {
+                if(currentCarouselImgIdx > 0) { currentCarouselImgIdx--; updateInstaModalImg(); }
+            });
+            document.getElementById('instaNextBtn').addEventListener('click', () => {
+                if(currentCarouselImgIdx < currentInstaPost.images.length - 1) { currentCarouselImgIdx++; updateInstaModalImg(); }
+            });
+
+            document.getElementById('addScheduleForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const newEvt = {
+                    id: Date.now(),
+                    title: document.getElementById('newScheduleTitle').value,
+                    date: document.getElementById('newScheduleDate').value,
+                    time: document.getElementById('newScheduleTime').value || "TBA",
+                    location: document.getElementById('newScheduleLocation').value || "TBA",
+                    tag: document.getElementById('newScheduleTag').value,
+                    desc: document.getElementById('newScheduleDesc').value || "No additional details provided."
+                };
+                scheduleEvents.push(newEvt);
+                renderCalendar();
+                renderScheduleList();
+                document.getElementById('addScheduleModal').classList.add('hidden');
+                document.getElementById('addScheduleForm').reset();
+            });
+        }
+    </script>
+</body>
+</html>
