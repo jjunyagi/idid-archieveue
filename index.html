@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IDID Archive - Unofficial Fan Platform</title>
 
-    <!-- THIS IS WHERE IT SHOULD BE -->
     <link rel="icon" type="image/png" href="logo.png">
 
     <!-- Tailwind CSS -->
@@ -473,6 +472,17 @@
     </main>
 
     <!-- MODALS -->
+
+    <!-- Image Lightbox Modal for any Image Click -->
+    <div id="imageLightboxModal" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md z-[60] flex items-center justify-center p-4 hidden">
+        <div class="relative max-w-4xl max-h-[90vh] flex flex-col items-center justify-center">
+            <button id="closeLightboxBtn" class="absolute -top-10 right-0 text-slate-300 hover:text-white p-2 rounded-lg bg-slate-900/80 border border-slate-700/80">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <img id="lightboxImage" src="" class="max-h-[85vh] max-w-full object-contain rounded-2xl border border-slate-800 shadow-2xl" />
+        </div>
+    </div>
+
     <div id="replyModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
         <div class="glass-panel w-full max-w-lg rounded-2xl border border-slate-800 overflow-hidden shadow-2xl relative max-h-[80vh] flex flex-col">
             <div class="p-4 border-b border-slate-800/80 flex items-center justify-between">
@@ -497,7 +507,7 @@
                 </button>
             </div>
             <div class="relative aspect-square bg-black flex items-center justify-center">
-                <img id="instaModalImage" src="" class="max-h-full max-w-full object-contain" />
+                <img id="instaModalImage" src="" class="max-h-full max-w-full object-contain cursor-pointer" />
                 <button id="instaPrevBtn" class="absolute left-3 p-2 rounded-full bg-slate-950/70 text-white hover:bg-idid-400 hover:text-slate-950">
                     <i data-lucide="chevron-left" class="w-5 h-5"></i>
                 </button>
@@ -590,7 +600,7 @@
     </div>
 
     <script>
-        // DATA STORES (using explicit dates instead of relative time)
+        // DATA STORES
         let scheduleEvents = [
             { id: 1, title: "IDID Withmuu Fansign", date: "2026-11-01", time: "14:00 KST", location: "Withmuu Flagship Store", tag: "Fansign", desc: "Face-to-face fansign event for 'CHANRAN' album release." },
             { id: 2, title: "Mnet M COUNTDOWN Live", date: "2026-11-05", time: "18:00 KST", location: "CJ ENM Center Studio", tag: "MusicShow", desc: "Live performance stage for 'PUSH BACK'." }
@@ -690,6 +700,15 @@
             renderTikTok();
             setupModals();
         });
+
+        function openImageLightbox(src) {
+            const lightboxModal = document.getElementById('imageLightboxModal');
+            const lightboxImg = document.getElementById('lightboxImage');
+            if (lightboxModal && lightboxImg) {
+                lightboxImg.src = src;
+                lightboxModal.classList.remove('hidden');
+            }
+        }
 
         function setupNavigation() {
             const tabs = document.querySelectorAll('.nav-tab');
@@ -953,7 +972,7 @@
                                 <p class="text-xs text-slate-200 leading-relaxed main-text">${post.enText}</p>
                                 <button class="text-[10px] font-semibold text-idid-400 hover:underline main-trans-btn" data-state="en">Original</button>
                             </div>
-                            ${post.image ? `<img src="${post.image}" class="w-full h-48 object-cover rounded-xl border border-slate-800" />` : ''}
+                            ${post.image ? `<img src="${post.image}" class="post-img w-full h-48 object-cover rounded-xl border border-slate-800 cursor-pointer hover:opacity-90 transition-opacity" />` : ''}
                         </div>
 
                         <div class="pt-3 border-t border-slate-800 flex items-center justify-between">
@@ -978,6 +997,11 @@
                             mainTransBtn.setAttribute('data-state', 'en');
                         }
                     });
+
+                    const postImg = card.querySelector('.post-img');
+                    if(postImg) {
+                        postImg.addEventListener('click', () => openImageLightbox(post.image));
+                    }
 
                     card.querySelector('.open-reply-btn').addEventListener('click', () => openReplyModal(post));
                 }
@@ -1087,7 +1111,7 @@
                                 <p class="text-xs text-slate-200 leading-relaxed main-text">${post.enText}</p>
                                 <button class="text-[10px] font-semibold text-idid-400 hover:underline main-trans-btn" data-state="en">Original</button>
                             </div>
-                            ${post.image ? `<img src="${post.image}" class="w-full h-48 object-cover rounded-xl border border-slate-800" />` : ''}
+                            ${post.image ? `<img src="${post.image}" class="post-img w-full h-48 object-cover rounded-xl border border-slate-800 cursor-pointer hover:opacity-90 transition-opacity" />` : ''}
                         </div>
 
                         <div class="pt-3 border-t border-slate-800 flex items-center justify-between">
@@ -1112,6 +1136,11 @@
                             mainTransBtn.setAttribute('data-state', 'en');
                         }
                     });
+
+                    const postImg = card.querySelector('.post-img');
+                    if(postImg) {
+                        postImg.addEventListener('click', () => openImageLightbox(post.image));
+                    }
 
                     card.querySelector('.open-reply-btn').addEventListener('click', () => openReplyModal(post));
                 }
@@ -1168,7 +1197,7 @@
                                 <p class="text-xs text-slate-300 fan-comment-text">${item.fanEnText}</p>
                                 <button class="text-[10px] font-semibold text-idid-400 hover:underline fan-comment-trans-btn" data-state="en">Original</button>
                             </div>
-                            ${item.fanImage ? `<img src="${item.fanImage}" class="w-32 h-20 object-cover rounded-lg border border-slate-800 ml-8 mt-1" />` : ''}
+                            ${item.fanImage ? `<img src="${item.fanImage}" class="fan-comment-img w-32 h-20 object-cover rounded-lg border border-slate-800 ml-8 mt-1 cursor-pointer hover:opacity-90 transition-opacity" />` : ''}
                         </div>
                         <div class="p-2.5 rounded-lg bg-slate-950/80 border border-idid-400/30 space-y-1 ml-6 border-l-2 border-l-idid-400">
                             <div class="flex items-center gap-2">
@@ -1182,6 +1211,11 @@
                             </div>
                         </div>
                     `;
+
+                    const fanCommentImg = elem.querySelector('.fan-comment-img');
+                    if(fanCommentImg) {
+                        fanCommentImg.addEventListener('click', () => openImageLightbox(item.fanImage));
+                    }
 
                     const fanTransBtn = elem.querySelector('.fan-comment-trans-btn');
                     const fanTextElem = elem.querySelector('.fan-comment-text');
@@ -1303,7 +1337,8 @@
         }
 
         function updateInstaModalImg() {
-            document.getElementById('instaModalImage').src = currentInstaPost.images[currentCarouselImgIdx];
+            const imgElem = document.getElementById('instaModalImage');
+            imgElem.src = currentInstaPost.images[currentCarouselImgIdx];
             document.getElementById('instaPrevBtn').style.display = currentInstaPost.images.length > 1 ? 'block' : 'none';
             document.getElementById('instaNextBtn').style.display = currentInstaPost.images.length > 1 ? 'block' : 'none';
         }
@@ -1336,12 +1371,35 @@
                     </div>
                     <div class="p-3"><h4 class="text-xs font-bold text-slate-200 line-clamp-1">${t.member}</h4><p class="text-[10px] text-slate-400 line-clamp-1 mt-0.5">${t.title}</p></div>
                 `;
+                card.querySelector('img').addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    openImageLightbox(t.thumbnail);
+                });
                 container.appendChild(card);
             });
             lucide.createIcons();
         }
 
         function setupModals() {
+            // Lightbox Modal setup
+            const lightboxModal = document.getElementById('imageLightboxModal');
+            const closeLightboxBtn = document.getElementById('closeLightboxBtn');
+            if (closeLightboxBtn) {
+                closeLightboxBtn.addEventListener('click', () => lightboxModal.classList.add('hidden'));
+            }
+            if (lightboxModal) {
+                lightboxModal.addEventListener('click', (e) => {
+                    if (e.target === lightboxModal) {
+                        lightboxModal.classList.add('hidden');
+                    }
+                });
+            }
+
+            // Instagram image click opens full image in lightbox
+            document.getElementById('instaModalImage').addEventListener('click', () => {
+                openImageLightbox(currentInstaPost.images[currentCarouselImgIdx]);
+            });
+
             document.getElementById('closeReplyModalBtn').addEventListener('click', () => document.getElementById('replyModal').classList.add('hidden'));
             document.getElementById('closeInstaModalBtn').addEventListener('click', () => document.getElementById('instaCarouselModal').classList.add('hidden'));
             document.getElementById('closeEventModalBtn').addEventListener('click', () => document.getElementById('eventModal').classList.add('hidden'));
