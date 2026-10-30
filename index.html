@@ -2,6 +2,7 @@
 <html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
+    <meta name="referrer" content="no-referrer">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IDID Media Archive</title>
     <link rel="icon" type="image/png" href="https://pbs.twimg.com/profile_images/2053815178027003904/1BkSRYIe_400x400.jpg">
@@ -243,20 +244,20 @@
                 const matchesType = typeVal === 'ALL' || item.type.toLowerCase() === typeVal.toLowerCase();
                 
                 const matchesMember = memberVal === 'all' || 
-                                      item.member.toLowerCase().includes(memberVal) || 
-                                      item.details.toLowerCase().includes(memberVal) ||
-                                      (memberVal.includes('wonbin') && item.details.toLowerCase().includes('#wonbin')) ||
-                                      (memberVal.includes('yoochan') && item.details.toLowerCase().includes('#yoochan')) ||
-                                      (memberVal.includes('yonghoon') && item.details.toLowerCase().includes('#yonghoon')) ||
-                                      (memberVal.includes('minjae') && item.details.toLowerCase().includes('#minjae')) ||
-                                      (memberVal.includes('seonghyeon') && item.details.toLowerCase().includes('#seonghyeon')) ||
-                                      (memberVal.includes('junhyuk') && item.details.toLowerCase().includes('#junhyuk')) ||
-                                      (memberVal.includes('semin') && item.details.toLowerCase().includes('#semin'));
+                                    item.member.toLowerCase().includes(memberVal) || 
+                                    item.details.toLowerCase().includes(memberVal) ||
+                                    (memberVal.includes('wonbin') && item.details.toLowerCase().includes('#wonbin')) ||
+                                    (memberVal.includes('yoochan') && item.details.toLowerCase().includes('#yoochan')) ||
+                                    (memberVal.includes('yonghoon') && item.details.toLowerCase().includes('#yonghoon')) ||
+                                    (memberVal.includes('minjae') && item.details.toLowerCase().includes('#minjae')) ||
+                                    (memberVal.includes('seonghyeon') && item.details.toLowerCase().includes('#seonghyeon')) ||
+                                    (memberVal.includes('junhyuk') && item.details.toLowerCase().includes('#junhyuk')) ||
+                                    (memberVal.includes('semin') && item.details.toLowerCase().includes('#semin'));
 
                 const matchesQuery = item.title.toLowerCase().includes(query) || 
-                                     item.krTitle.toLowerCase().includes(query) || 
-                                     item.author.toLowerCase().includes(query) ||
-                                     item.details.toLowerCase().includes(query);
+                                   item.krTitle.toLowerCase().includes(query) || 
+                                   item.author.toLowerCase().includes(query) ||
+                                   item.details.toLowerCase().includes(query);
 
                 return matchesType && matchesMember && matchesQuery;
             });
