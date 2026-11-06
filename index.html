@@ -423,21 +423,29 @@
         const ytId = getYouTubeId(currentMedia);
         const ttId = getTikTokId(currentMedia);
 
-        if (ytId) {
-            const iframe = document.createElement('iframe');
+if (ytId) {
+    const iframe = document.createElement('iframe');
 
-            iframe.className = 'w-full aspect-video';
-            iframe.src = `https://www.youtube.com/embed/${ytId}?autoplay=1&playsinline=1`;
+    iframe.className = 'w-full aspect-video';
 
-            iframe.setAttribute('title', 'YouTube video player');
-            iframe.setAttribute('frameborder', '0');
-            iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
-            iframe.setAttribute('allowfullscreen', '');
-            iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+    // Configure player before loading YouTube
+    iframe.setAttribute('title', 'YouTube video player');
+    iframe.setAttribute('frameborder', '0');
+    iframe.setAttribute(
+        'allow',
+        'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+    );
+    iframe.setAttribute('allowfullscreen', '');
 
-            container.appendChild(iframe);
+    // Important for YouTube Error 153
+    iframe.referrerPolicy = 'strict-origin-when-cross-origin';
 
-        } else if (ttId) {
+    // Set source LAST, after configuring iframe
+    iframe.src = `https://www.youtube.com/embed/${ytId}?autoplay=1&playsinline=1`;
+
+    container.appendChild(iframe);
+
+} else if (ttId) {
             container.innerHTML = `
                 <iframe
                     class="w-full h-[500px]"
