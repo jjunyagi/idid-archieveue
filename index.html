@@ -236,7 +236,7 @@
                     krTitle: item.kr_title || item.original_text || '',
                     member: item.member || 'All',
                     date: item.date || '2026',
-                    mediaList: mediaUrls.length > 0 ? mediaUrls : ['https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600&auto=format&fit=crop&q=80'],
+                    mediaList: mediaUrls.length > 0 ? mediaUrls : ['https://pbs.twimg.com/profile_images/2053814929602596864/7OSaFRk-_400x400.jpg'],
                     category: item.category || 'Media',
                     details: item.details || item.tags || ''
                 };
@@ -329,7 +329,7 @@
                 </div>
 
                 <div class="relative aspect-square bg-slate-900 overflow-hidden">
-                    <img src="${displayImg}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.src='https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600&auto=format&fit=crop&q=80'">
+                    <img src="${displayImg}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.src='https://pbs.twimg.com/profile_images/2053814929602596864/7OSaFRk-_400x400.jpg'">
 
                     ${isMultiple ? `
                         <div class="absolute top-2.5 right-2.5 p-1.5 rounded-lg bg-slate-950/80 text-idid-400 border border-idid-400/40 shadow-lg">
@@ -469,7 +469,7 @@ if (ytId) {
                 <img
                     src="${currentMedia}"
                     class="max-h-[60vh] w-full object-contain"
-                    onerror="this.src='https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600&auto=format&fit=crop&q=80'">
+                    onerror="this.src='https://pbs.twimg.com/profile_images/2053814929602596864/7OSaFRk-_400x400.jpg'">
             `;
         }
 
