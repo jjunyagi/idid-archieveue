@@ -218,6 +218,15 @@
         const match = url.match(/video\/(\d+)/);
         return match ? match[1] : null;
     }
+    function getInstagramId(url) {
+    if (!url) return null;
+
+    const match = url.match(
+        /instagram\.com\/(?:reel|p|tv)\/([A-Za-z0-9_-]+)/
+    );
+
+    return match ? match[1] : null;
+}
 
     async function fetchMediaData() {
         try {
@@ -306,8 +315,9 @@
 
             const firstMedia = item.mediaList[0];
             const ytId = getYouTubeId(firstMedia);
+            const igId = getInstagramId(firstMedia);
             const isTikTok = item.type.toLowerCase() === 'tiktok' || firstMedia.includes('tiktok.com');
-            const isVideo = ytId || isTikTok || firstMedia.endsWith('.mp4');
+            const isVideo = ytId || igId || isTikTok || firstMedia.endsWith('.mp4');
             const isMultiple = item.mediaList.length > 1;
 
             let displayImg = firstMedia;
@@ -421,6 +431,7 @@
 
         const ytId = getYouTubeId(currentMedia);
         const ttId = getTikTokId(currentMedia);
+        const igId = getInstagramId(currentMedia);
 
 if (ytId) {
     const iframe = document.createElement('iframe');
@@ -443,7 +454,26 @@ if (ytId) {
     iframe.src = `https://www.youtube.com/embed/${ytId}?autoplay=1&playsinline=1`;
 
     container.appendChild(iframe);
+} else if (igId) {
+    container.innerHTML = `
+        <div class="w-full flex flex-col items-center gap-3 p-3">
+            <iframe
+                src="https://www.instagram.com/reel/${igId}/embed/"
+                class="w-full max-w-[420px] h-[600px] bg-white rounded-xl"
+                frameborder="0"
+                scrolling="no"
+                allowfullscreen>
+            </iframe>
 
+            <a
+                href="https://www.instagram.com/reel/${igId}/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-sm text-idid-400 hover:underline">
+                Open on Instagram
+            </a>
+        </div>
+    `;
 } else if (ttId) {
             container.innerHTML = `
                 <iframe
